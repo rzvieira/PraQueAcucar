@@ -1,88 +1,151 @@
- 
- //<!-- ========================= -->
-        //////////////This Theme Design and Developed //////////////////////
-        //////////// by www.wpfreeware.com======================-->
+/* ========================================================================= */
+/*	Preloader
+/* ========================================================================= */
 
- jQuery(document).ready(function(){
-   // for search bar
-     $('#searchIcon').on("click", function () {
-      $(this).parents('.header_search').find("#shide").css('top','0px')
-      $(this).parents('.header_search').find("#shide").css('display','block')
-     
-});
-    $('.remove').on("click", function () {
-    $(this).parents('#shide').fadeOut();
-    $(this).parents('#shide').css('top','-80px')
-});    
-   
-  //Check to see if the window is top if not then display button
-  $(window).scroll(function(){
-    if ($(this).scrollTop() > 300) {
-      $('.scrollToTop').fadeIn();
-    } else {
-      $('.scrollToTop').fadeOut();
-    }
-  });
-   
-     //Click event to scroll to top
-  $('.scrollToTop').click(function(){
-    $('html, body').animate({scrollTop : 0},800);
-    return false;
-  });
+jQuery(window).load(function(){
 
-  $('.tootlip').tooltip(); 
-  $("ul#ticker01").liScroll(); 
+	$("#preloader").fadeOut("slow");
 
 });
 
- wow = new WOW(
-      {
-        animateClass: 'animated',
-        offset:       100
-      }
-    );
-    wow.init();
-    // document.getElementById('moar').onclick = function() {
-    //   var section = document.createElement('section');
-    //   section.className = 'section--purple wow fadeInDown';
-    //   this.parentNode.insertBefore(section, this);
-    // };
 
-  <!-- Preloader -->
+$(document).ready(function(){
 
-  //<![CDATA[
-    jQuery(window).load(function() { // makes sure the whole site is loaded
-      $('#status').fadeOut(); // will first fade out the loading animation
-      $('#preloader').delay(700).fadeOut('slow'); // will fade out the white DIV that covers the website.
-      $('body').delay(700).css({'overflow':'visible'});
-    })
-  //]]>
+	/* ========================================================================= */
+	/*	Menu item highlighting
+	/* ========================================================================= */
 
-  // slick slider call
-  $(document).ready(function(){  
-  $('.owl-carousel').slick({
-  centerMode: true,
-  centerPadding: '0px',
-  slidesToShow: 3,
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        arrows: true,
-        centerMode: true,
-        centerPadding: '0px',
-        slidesToShow: 2
-      }
-    },
-    {
-      breakpoint: 480,
-      settings: {
-        arrows: true,
-        centerMode: true,
-        centerPadding: '0px',
-        slidesToShow: 1
-      }
-    }
-  ]
+	jQuery('#nav').singlePageNav({
+		offset: jQuery('#nav').outerHeight(),
+		filter: ':not(.external)',
+		speed: 1200,
+		currentClass: 'current',
+		easing: 'easeInOutExpo',
+		updateHash: true,
+		beforeStart: function() {
+			console.log('begin scrolling');
+		},
+		onComplete: function() {
+			console.log('done scrolling');
+		}
+	});
+	
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 400) {
+            $("#navigation").css("background-color","#0EB493");
+        } else {
+            $("#navigation").css("background-color","rgba(16, 22, 54, 0.2)");
+        }
+    });
+	
+	/* ========================================================================= */
+	/*	Fix Slider Height
+	/* ========================================================================= */	
+
+	var slideHeight = $(window).height();
+	
+	$('#slider, .carousel.slide, .carousel-inner, .carousel-inner .item').css('height',slideHeight);
+
+	$(window).resize(function(){'use strict',
+		$('#slider, .carousel.slide, .carousel-inner, .carousel-inner .item').css('height',slideHeight);
+	});
+	
+	
+	/* ========================================================================= */
+	/*	Portfolio Filtering
+	/* ========================================================================= */	
+	
+	
+    // portfolio filtering
+
+    $(".project-wrapper").mixItUp();
+	
+	
+	$(".fancybox").fancybox({
+		padding: 0,
+
+		openEffect : 'elastic',
+		openSpeed  : 650,
+
+		closeEffect : 'elastic',
+		closeSpeed  : 550,
+
+		closeClick : true,
+	});
+	
+	/* ========================================================================= */
+	/*	Parallax
+	/* ========================================================================= */	
+	
+	$('#facts').parallax("50%", 0.3);
+	
+	/* ========================================================================= */
+	/*	Timer count
+	/* ========================================================================= */
+
+	"use strict";
+    $(".number-counters").appear(function () {
+        $(".number-counters [data-to]").each(function () {
+            var e = $(this).attr("data-to");
+            $(this).delay(6e3).countTo({
+                from: 50,
+                to: e,
+                speed: 3e3,
+                refreshInterval: 50
+            })
+        })
+    });
+	
+	/* ========================================================================= */
+	/*	Back to Top
+	/* ========================================================================= */
+	
+	
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 400) {
+            $("#back-top").fadeIn(200)
+        } else {
+            $("#back-top").fadeOut(200)
+        }
+    });
+    $("#back-top").click(function () {
+        $("html, body").stop().animate({
+            scrollTop: 0
+        }, 1500, "easeInOutExpo")
+    });
+	
 });
-});
+
+
+// ==========  START GOOGLE MAP ========== //
+function initialize() {
+    var myLatLng = new google.maps.LatLng(22.402789, 91.822156);
+
+    var mapOptions = {
+        zoom: 14,
+        center: myLatLng,
+        disableDefaultUI: true,
+        scrollwheel: false,
+        navigationControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        draggable: false,
+        mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'roadatlas']
+        }
+    };
+
+    var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+
+
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        icon: 'img/location-icon.png',
+        title: '',
+    });
+
+}
+
+google.maps.event.addDomListener(window, "load", initialize);
+// ========== END GOOGLE MAP ========== //

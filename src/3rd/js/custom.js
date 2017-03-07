@@ -93,7 +93,7 @@ $(document).ready(function(){
                 speed: 3e3,
                 refreshInterval: 50
             })
-        })
+        })  
     });
 	
 	/* ========================================================================= */
@@ -141,7 +141,7 @@ function initialize() {
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
-        icon: 'img/location-icon.png',
+        icon: '/3rd/img/location-icon.png',
         title: '',
     });
 

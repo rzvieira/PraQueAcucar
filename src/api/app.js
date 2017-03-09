@@ -1,3 +1,5 @@
+//http://thbastos.com/blog/criando-uma-aplicacao-em-nodejs-3-criando-nossa-api-node
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -14,7 +16,7 @@ var mysql = require('mysql');
 var connection = require('express-myconnection');
 
 // Requisição ao arquivo que cria nosso model Contato
-require('./models/user');
+//require('./models/user');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

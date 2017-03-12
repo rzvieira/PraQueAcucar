@@ -11,6 +11,9 @@ router.get('/api/posts', function (req, res) {
       res.status(200).json(result);
     });
   });
+
+  //  res.writeHead(200, { 'Content-Type': 'text/html' });
+  //   res.end('Hello, world!');
 });
 
 /* POST */

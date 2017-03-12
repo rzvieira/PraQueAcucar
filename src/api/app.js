@@ -31,19 +31,30 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
-// connection with data base
+// // connection with data base
+// app.use(
+//   connection(mysql, {
+//     host: '127.0.0.1',
+//     user: 'root',
+//     password: 'root',
+//     port: '3306',
+//     database: 'praqueacucar'
+//   }, 'request')
+// );
+
+// //connection with data base
 app.use(
   connection(mysql, {
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
+    host: 'mysql4.gear.host',
+    user: 'praqueacucar',
+    password: 'Uu2N9_YX-4ax',
     port: '3306',
     database: 'praqueacucar'
   }, 'request')
 );
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/', users);
 
 
 
@@ -67,7 +78,7 @@ app.use(function (err, req, res, next) {
 
 // LISTEN (iniciando nossa aplicação em node) ==========
 // Define a porta 8080 onde será executada nossa aplicação
-app.listen(8080);
+app.listen(process.env.PORT || 8080);
 // Imprime uma mensagem no console
 console.log("Aplicação executada na porta 8080");
 

@@ -1,4 +1,5 @@
 //http://thbastos.com/blog/criando-uma-aplicacao-em-nodejs-3-criando-nossa-api-node
+//autenticação https://code.tutsplus.com/pt/tutorials/token-based-authentication-with-angularjs-nodejs--cms-22543
 
 var express = require('express');
 var path = require('path');
@@ -32,26 +33,26 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 // // connection with data base
-// app.use(
-//   connection(mysql, {
-//     host: '127.0.0.1',
-//     user: 'root',
-//     password: 'root',
-//     port: '3306',
-//     database: 'praqueacucar'
-//   }, 'request')
-// );
-
-// //connection with data base
 app.use(
   connection(mysql, {
-    host: 'mysql4.gear.host',
-    user: 'praqueacucar',
-    password: 'Uu2N9_YX-4ax',
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'root',
     port: '3306',
     database: 'praqueacucar'
   }, 'request')
 );
+
+// //connection with data base
+// app.use(
+//   connection(mysql, {
+//     host: 'mysql4.gear.host',
+//     user: 'praqueacucar',
+//     password: 'Uu2N9_YX-4ax',
+//     port: '3306',
+//     database: 'praqueacucar'
+//   }, 'request')
+// );
 
 app.use('/', index);
 app.use('/', users);

@@ -7,9 +7,13 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var jwt = require('jsonwebtoken');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var account = require('./routes/account')
+
+var User = require('./models/user');
 
 var app = express();
 
@@ -31,6 +35,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+app.use(function(req, res, next){
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type, Authorization');
+  next();
+});
 
 // // connection with data base
 app.use(
@@ -56,7 +66,7 @@ app.use(
 
 app.use('/', index);
 app.use('/', users);
-
+app.use('/', account);
 
 
 // catch 404 and forward to error handler

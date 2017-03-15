@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.post('/api/authenticate', function (req, res) {
     req.getConnection(function (err, connection) {
-        connection.query('SELECT * WHERE email = ? AND password = ?', [req.body.email, req.body.password], function (err, result) {
+        connection.query('SELECT * FROM useraccount WHERE email = ? AND password = ?', [req.body.email, req.body.password], function (err, result) {
             if (err) {
                 res.json({
                     type: false,

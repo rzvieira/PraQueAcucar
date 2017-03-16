@@ -1,5 +1,6 @@
 //http://thbastos.com/blog/criando-uma-aplicacao-em-nodejs-3-criando-nossa-api-node
 //autenticação https://code.tutsplus.com/pt/tutorials/token-based-authentication-with-angularjs-nodejs--cms-22543
+//autenticação oauth https://toddmotto.com/angular-2-authentication
 
 var express = require('express');
 var path = require('path');

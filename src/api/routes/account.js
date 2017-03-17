@@ -83,4 +83,45 @@ router.post('/api/signin', function (req, res) {
     });
 });
 
+router.get('/api/me', ensureAuthorized, function (req, res) {
+    req.getConnection(function (err, connection) {
+        var token = req.token;
+        connection.query('SELECT * FROM useraccount WHERE token = ? ', [token], function (err, result) {
+            if (err) {
+                res.json({
+                    type: false,
+                    data: 'Error ocurred: ' + err
+                });
+            }
+            else {
+              if (result.length > 0) {
+                    res.json({
+                        type: true,
+                        data: result,
+                    });
+                }
+                else {
+                    res.status(403).json('Invalid token');
+                }git 
+            }
+        });
+    });
+});
+
+function ensureAuthorized(req, res, next) {
+
+    console.log('ensureAuthorized' + req.headers);
+    var bearerToken;
+    var bearerHeader = req.headers["authorization"];
+    if (typeof bearerHeader !== 'undefined') {
+        let bearer = bearerHeader.split(" ");
+        bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    }
+    else {
+        res.send(403);
+    }
+}
+
 module.exports = router;

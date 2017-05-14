@@ -44,26 +44,26 @@ app.use(function(req, res, next){
 });
 
 // // connection with data base
-app.use(
-  connection(mysql, {
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'root',
-    port: '3306',
-    database: 'praqueacucar'
-  }, 'request')
-);
-
-// //connection with data base
 // app.use(
 //   connection(mysql, {
-//     host: 'mysql4.gear.host',
-//     user: 'praqueacucar',
-//     password: 'Uu2N9_YX-4ax',
+//     host: '127.0.0.1',
+//     user: 'root',
+//     password: 'root',
 //     port: '3306',
 //     database: 'praqueacucar'
 //   }, 'request')
 // );
+
+//connection with data base
+app.use(
+  connection(mysql, {
+    host: 'mysql4.gear.host',
+    user: 'praqueacucar',
+    password: 'Uu2N9_YX-4ax',
+    port: '3306',
+    database: 'praqueacucar'
+  }, 'request')
+);
 
 app.use('/', index);
 app.use('/', users);

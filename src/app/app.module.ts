@@ -11,6 +11,8 @@ import { TeamComponent } from './components/team/team.component';
 import { FunFactsComponent } from './components/funfacts/funfacts.component';
 import { ContactComponent } from './components/contact/contact.component';
   
+import { AppComponentAdmin } from "./app.component.admin";
+
 enableProdMode();
 
 @NgModule({
@@ -21,7 +23,8 @@ enableProdMode();
     WorkComponent,
     TeamComponent,
     FunFactsComponent,
-    ContactComponent
+    ContactComponent,
+    AppComponentAdmin
   ],
   imports: [
     BrowserModule,
